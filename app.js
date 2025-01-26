@@ -5,6 +5,9 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { check, validationResult } = require('express-validator');
 const { Pool } = require('pg');
+const dotenv=require('dotenv');
+
+dotenv.config();
 
 
 const app = express();
@@ -15,7 +18,7 @@ app.use(bodyParser.json());
 // PostgreSQL Connection
 
 const pool = new Pool({
-    connectionString: "postgresql://postgres:cherryX77@localhost:5432/jarurat_backend_db",
+    connectionString: process.env.DB_URL,
 });
 pool.connect()
     .then(() => { console.log('Connected to Database'); })
